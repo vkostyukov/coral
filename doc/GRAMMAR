@@ -1,0 +1,55 @@
+# Coral Project
+# 
+# Copyright 2012, Vladimir Kostyukov <vladimir.kostukov@gmail.com>
+# License: http://www.apache.org/licenses/LICENSE-2.0.html
+#
+# Coral grammar in EBNF (http://en.wikipedia.org/wiki/Extended_Backus-Naur_Form)
+#
+# TODO: add "IF", "DO", "WHILE", "FOR", "REPEAT", comments
+#
+
+== Draft Grammar ==
+<PROGRAM> ::= { <STATEMENT> }
+<STATEMENT> ::= <OPERATOR>
+<OPERATOR> ::= <BUILDIN_OPERATOR> | <ASSIGNMENT>
+<BUILDIN_OPERATOR> ::= <PRINT>
+<PRINT> ::= "print" <EXPRESSION>
+<ASSIGNMENT> ::= <ID> "=" <EXPRESSION>
+<EXPRESSION> ::= [ <EXPRESSION> "+" | <EXPRESSION> "-" ] <SUMMAND>
+<SUMMAND> ::= [ <SUMMAND> "+" | <SUMMAND> "-" ] <MULTIPLIER>
+<MULTIPLIER> ::= [ <MULTIPLIER> "*" | <MULTIPLIER> "/" ] <SIMPLE_EXPRESSION>
+<SIMPLE_EXPRESSION> ::= <NUMBER> "(" <EXPRESSION> ")"
+
+
+
+
+== Grammar ==
+
+
+<PROGRAM> ::= { <STATEMENT> }
+<STATEMENT> ::= <FUNCTION> | <OPERATOR>
+<FUNCTION> ::= <ID> "(" [ <ID> { "," <ID> } ] ")" <TAB> <OPERATOR> { <TAB> <OPERATOR> }
+<OPERATOR> ::= <BUILDIN_OPERATOR> | <ASSIGNMENT> | <CALL>
+<BUILDIN_OPERATOR> ::= <PRINT> | <ERROR> | <RETURN>
+<PRINT> ::= "print" <EXPRESSION>
+<ERROR> ::= "error" <EXPRESSION>
+<RETURN> ::= "return" <EXPRESSION>
+<ASSIGNMENT> ::= <ID> "=" <EXPRESSION>
+<CALL> ::= <ID> "(" [ <EXPRESSION> { ", " <EXPRESSION> } ] ")"
+<EXPRESSION> ::= [ <EXPRESSION> "+" | <EXPRESSION> "-" ] <SUMMAND>
+<SUMMAND> ::= [ <SUMMAND> "+" | <SUMMAND> "-" ] <MULTIPLIER>
+<MULTIPLIER> ::= [ <MULTIPLIER> "*" | <MULTIPLIER> "/" ] <SIMPLE_EXPRESSION>
+<SIMPLE_EXPRESSION> ::= <ID> | <NUMBER> | <STRING> | <CALL> | "(" <EXPRESSION> ")"
+
+
+== Tokens ==
+
+"print", "error", "return", ID, NUMBER, STRING, ",", "+", "-", "=", "(", ")", "*", "/", "\t", "\n"
+
+
+
+
+
+
+
+
